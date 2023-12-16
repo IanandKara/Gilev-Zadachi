@@ -5,8 +5,8 @@
 int main()
 {
     /*
-    Дана строка, содержащая русский текст. Если в тексте нет слов-палиндромов длиной более 1-й буквы, 
-    то вывести слова текста в соответствии с убыванием количества согласных, в противном    
+    Дана строка, содержащая русский текст. Если в тексте нет слов-палиндромов длиной более 1-й буквы,
+    то вывести слова текста в соответствии с убыванием количества согласных, в противном
     случае пpодублиpовать в словах текста гласные буквы и вывести полученные слова в поpядке, обpатном к алфавитному.
     */
 
@@ -31,32 +31,34 @@ int main()
 
     if (flag == 1)
     {
-        for (int j = 0; j < n - 1; j++)  
-            for (int k = j + 1; k < n; k++)
-                if (tolower(words[j][0]) < tolower(words[k][0]))
+        for (int i = 0; i < n; i++)
+            ag::duplicateVowels(words[i]);
+
+        for (int i = 0; i < n - 1; i++)
+            for (int j = i + 1; j < n; j++)
+                if (strcmp(words[i], words[j]))
                 {
-                    strcpy_s(tmp, words[j]);
-                    strcpy_s(words[j], words[k]);
-                    strcpy_s(words[k], tmp);   
-                }
-        for (int j = 0; j < n; j++)
-            ag::duplicateVowels(words[j]);
-    }
+                    strcpy_s(tmp, words[i]);
+                    strcpy_s(words[i], words[j]);
+                    strcpy_s(words[j], tmp);
+                }          
+    }         
     else
     {
-        for(int j = 0; j < n - 1; j++)
-            for(int k = j + 1; k < n; k++)
-                if (ag::numOfConsonant(words[j]) < ag::numOfConsonant(words[k]))  
-                {
-                    strcpy_s(tmp, words[j]);
-                    strcpy_s(words[j], words[k]);
-                    strcpy_s(words[k], tmp);   
-                }
+        for (int j = 0; j < n - 1; j++)
+            for (int k = j + 1; k < n; k++)
+                if (ag::GetnumOfConsonant(words[j]) < ag::GetnumOfConsonant(words[k]))
+                {         
+                    strcpy_s(tmp, words[j]);            
+                    strcpy_s(words[j], words[k]);        
+                    strcpy_s(words[k], tmp);            
+                }          
     }
-    
-    
 
 
-    for (int i = 0; i < n; i++)
-        std::cout << "<" << words[i] << "> " << std::endl;
+
+
+            for (int i = 0; i < n; i++)
+                std::cout << "<" << words[i] << "> " << std::endl;
+
 }
