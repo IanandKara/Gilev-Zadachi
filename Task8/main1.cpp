@@ -5,9 +5,9 @@
 int main()
 {
     /*
-    Дан файл, содержащий русский текст. Найти в тексте N<=2000 слов, 
-    содержащих наибольшее количество одинаковых букв. Записать найденные слова 
-    в текстовый файл в порядке невозрастания количества одинаковых букв. Для каждого 
+    Дан файл, содержащий русский текст. Найти в тексте N<=2000 слов,
+    содержащих наибольшее количество одинаковых букв. Записать найденные слова
+    в текстовый файл в порядке невозрастания количества одинаковых букв. Для каждого
     слова вывести также это количество.
     */
 
@@ -21,21 +21,28 @@ int main()
     char words[500][50];
     int n = 0;
     ag::SplitText(text, words, n);
-
+    
     // Сортировка по кол-ву одинаковых букв
     char tmp[50];
+    
     for (int i = 0; i < n - 1; i++)
     {
-        for(int j = i+1; j < n; j++)
-        if (ag::NumOfIDLetters(words[i]) < ag::NumOfIDLetters(words[j]))
+        for (int j = i + 1; j < n; j++)
         {
-            strcpy_s(tmp, words[i]);
-            strcpy_s(words[i], words[j]);
-            strcpy_s(words[j], tmp);
+            if (ag::NumOfIDLetters(words[i]) < ag::NumOfIDLetters(words[j]))
+            {
+                strcpy_s(tmp, words[i]);
+                strcpy_s(words[i], words[j]);
+                strcpy_s(words[j], tmp);
+            }          
         }
     }
-
+    
     // Вывод результата
     for (int i = 0; i < n; i++)
-       std::cout << "<" << words[i] << " " << ag::NumOfIDLetters(words[i]) << ">" << std::endl;
+    {
+        if (ag::CheckNum(words[i], words[i + 1]))
+            i++;
+        std::cout << i << "<" << words[i] << " " << ag::NumOfIDLetters(words[i]) << ">" << std::endl;
+    }
 }
