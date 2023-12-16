@@ -25,7 +25,7 @@ int main()
 
     // Условия и действия
     for (int i = 0; i < n; i++)
-        if (ag::IsPalindrome(words[i]) && (strlen(words[i] > 1))
+        if (ag::IsPalindrome(words[i]) && (strlen(words[i]) > 1))
             flag = true;
 
 
