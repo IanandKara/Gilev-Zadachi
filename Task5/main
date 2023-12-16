@@ -1,0 +1,88 @@
+a$ = 0
+void foo_if(void) PROC                           ; foo_if
+$LN5:
+        sub     rsp, 24
+        mov     DWORD PTR a$[rsp], 1         // int a = 1
+        
+        cmp     DWORD PTR a$[rsp], 1        // If сравнение a и 1
+        jne     SHORT $LN2@foo_if     
+        
+        mov     eax, DWORD PTR a$[rsp]      // Сложение a = a + 10
+        add     eax, 10 
+        mov     DWORD PTR a$[rsp], eax
+        jmp     SHORT $LN3@foo_if
+        
+$LN2@foo_if: // else 
+
+        mov     eax, DWORD PTR a$[rsp]          // Умножение a = a * 2
+        shl     eax, 1
+        mov     DWORD PTR a$[rsp], eax
+        
+$LN3@foo_if:
+        add     rsp, 24
+        ret     0
+void foo_if(void) ENDP                           ; foo_if
+
+
+================================================================
+a$ = 0
+tv64 = 4
+void foo_switch(void) PROC                       ; foo_switch
+$LN7:
+        sub     rsp, 24
+        
+        mov     DWORD PTR a$[rsp], 0     // a = 0
+        
+        mov     eax, DWORD PTR a$[rsp]    // switch
+        mov     DWORD PTR tv64[rsp], eax
+        cmp     DWORD PTR tv64[rsp], 0
+        je      SHORT $LN4@foo_switch
+        cmp     DWORD PTR tv64[rsp], 1
+        je      SHORT $LN5@foo_switch
+        jmp     SHORT $LN2@foo_switch
+        
+$LN4@foo_switch:
+
+        mov     eax, DWORD PTR a$[rsp]        // case 0 и a = a + 10
+        add     eax, 10
+        mov     DWORD PTR a$[rsp], eax
+        
+        jmp     SHORT $LN2@foo_switch          // break
+        
+$LN5@foo_switch:
+
+        mov     eax, DWORD PTR a$[rsp]      // case 1 и a = a * 2
+        shl     eax, 1
+        mov     DWORD PTR a$[rsp], eax
+        
+$LN2@foo_switch:
+        add     rsp, 24
+        ret     0
+void foo_switch(void) ENDP                       ; foo_switch
+
+
+================================================================
+a$ = 0
+tv67 = 4
+void foo_ternary(void) PROC                                ; foo_ternary
+$LN5:
+        sub     rsp, 24
+        
+        mov     DWORD PTR a$[rsp], 0       // int a = 0
+        
+        cmp     DWORD PTR a$[rsp], 1      // a == 1
+        jne     SHORT $LN3@foo_ternar
+        mov     eax, DWORD PTR a$[rsp]
+        add     eax, 10                    // a + 10
+        mov     DWORD PTR tv67[rsp], eax  // : a
+        jmp     SHORT $LN4@foo_ternar
+$LN3@foo_ternar:
+        mov     eax, DWORD PTR a$[rsp]
+        shl     eax, 1                     // a * 2
+        mov     DWORD PTR tv67[rsp], eax
+$LN4@foo_ternar:
+        mov     eax, DWORD PTR tv67[rsp]
+        mov     DWORD PTR a$[rsp], eax
+        add     rsp, 24
+        ret     0
+void foo_ternary(void) ENDP                                ; foo_ternary
