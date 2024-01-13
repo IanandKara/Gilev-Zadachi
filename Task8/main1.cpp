@@ -21,10 +21,21 @@ int main()
     char words[500][50];
     int n = 0;
     ag::SplitText(text, words, n);
-    
+
+    // Удаление повторов
+    int k = 0;
+
+    for (int i = 0; i < n - 1; i++)
+        for (int j = i + 1; j < n; j++)
+            if ( (strcmp(words[i], "F") == 1) && (strcmp(words[i], words[j]) == 0))
+            {
+                strcpy_s(words[j], "F");
+                k++;
+            }
+
     // Сортировка по кол-ву одинаковых букв
     char tmp[50];
-    
+
     for (int i = 0; i < n - 1; i++)
     {
         for (int j = i + 1; j < n; j++)
@@ -34,15 +45,13 @@ int main()
                 strcpy_s(tmp, words[i]);
                 strcpy_s(words[i], words[j]);
                 strcpy_s(words[j], tmp);
-            }          
+            }
         }
     }
-    
+
     // Вывод результата
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n-k; i++)
     {
-        if (ag::CheckNum(words[i], words[i + 1]))
-            i++;
-        std::cout << i << "<" << words[i] << " " << ag::NumOfIDLetters(words[i]) << ">" << std::endl;
+        std::cout << i << "<" << words[i] << " " << ag::NumOfIDLetters(words[i]) << "> " << std::endl;
     }
 }
