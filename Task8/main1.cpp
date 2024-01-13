@@ -22,7 +22,7 @@ int main()
     int n = 0;
     ag::SplitText(text, words, n);
 
-    // Удаление повторов
+    // Выявление повторов
     int k = 0;
 
     for (int i = 0; i < n - 1; i++)
