@@ -28,37 +28,40 @@ int main()
         if (ag::IsPalindrome(words[i]) && (strlen(words[i]) > 1))
             flag = true;
 
-
+    
     if (flag == 1)
     {
         for (int i = 0; i < n; i++)
+        {
             ag::duplicateVowels(words[i]);
+            ag::tolower(words[i]);
+        }
 
         for (int i = 0; i < n - 1; i++)
-            for (int j = i + 1; j < n; j++)
-                if (strcmp(words[i], words[j]))
+            for (int j = i + 1; j < n; j++)         
+                if (strcmp(words[i], words[j]) <= 0)
                 {
                     strcpy_s(tmp, words[i]);
                     strcpy_s(words[i], words[j]);
                     strcpy_s(words[j], tmp);
-                }          
-    }         
+                }
+    }
     else
     {
         for (int j = 0; j < n - 1; j++)
             for (int k = j + 1; k < n; k++)
-                if (ag::GetnumOfConsonant(words[j]) < ag::GetnumOfConsonant(words[k]))
-                {         
-                    strcpy_s(tmp, words[j]);            
-                    strcpy_s(words[j], words[k]);        
-                    strcpy_s(words[k], tmp);            
-                }          
+                if (ag::numOfConsonant(words[j]) < ag::numOfConsonant(words[k]))
+                {
+                    strcpy_s(tmp, words[j]);
+                    strcpy_s(words[j], words[k]);
+                    strcpy_s(words[k], tmp);
+                }
     }
 
 
 
 
-            for (int i = 0; i < n; i++)
-                std::cout << "<" << words[i] << "> " << std::endl;
+    for (int i = 0; i < n; i++)
+        std::cout << "<" << words[i] << "> " << std::endl;
 
 }
