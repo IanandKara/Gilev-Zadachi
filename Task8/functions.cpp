@@ -88,34 +88,34 @@ namespace ag
     int NumOfIDLetters(char* str)
     {
         int sum = 0;
-        for (int j = 0; j < strlen(str) - 1; j++)
+        for (int i = 0; i < strlen(str) - 1; i++)
         {
-            int tmp = sum;
-            for (int k = j + 1; k < strlen(str); k++)
-                if (tolower(str[j]) == tolower(str[k]))
+            int tmp = 1;
+            for (int j = i + 1; j < strlen(str); j++)
+                if (str[i] == str[j])
                     tmp++;
-            if (tmp > sum)
-                sum = tmp;
-        }
 
+                if (tmp > sum)
+                    sum = tmp;
+        }
         return sum;
     }
 
     bool IsPalindrome(char* str)
-    {    
-            if ((strlen(str) % 2) == 0)
-            {
-                for (int i = 0; i < (strlen(str) / 2); i++)
-                    if (tolower(str[i]) != tolower(str[strlen(str) - 1 - i]))
-                        return false;
-            }
-            else
-            {
-                for (int i = 0; i < ((strlen(str) - 1) / 2); i++)
-                    if (tolower(str[i]) != tolower(str[strlen(str) - 1 - i]))
-                        return false;
-            }
-            return true;
+    {
+        if ((strlen(str) % 2) == 0)
+        {
+            for (int i = 0; i < (strlen(str) / 2); i++)
+                if (tolower(str[i]) != tolower(str[strlen(str) - 1 - i]))
+                    return false;
+        }
+        else
+        {
+            for (int i = 0; i < ((strlen(str) - 1) / 2); i++)
+                if (tolower(str[i]) != tolower(str[strlen(str) - 1 - i]))
+                    return false;
+        }
+        return true;
     }
 
     bool isVowel(char c)
@@ -133,7 +133,7 @@ namespace ag
     bool isConsonant(char c)
     {
         c = tolower(c);
-        char consonat[22] = { 'б', 'в', 'г', 'д', 'ж', 'з', 'й', 'к', 'л', 'м', 'н','п', 'р','с','т','ф','х','ц','ч','ш','щ'};
+        char consonat[22] = { 'б', 'в', 'г', 'д', 'ж', 'з', 'й', 'к', 'л', 'м', 'н','п', 'р','с','т','ф','х','ц','ч','ш','щ' };
 
         for (int i = 0; i < strlen(consonat); i++)
             if (c == consonat[i])
@@ -173,7 +173,7 @@ namespace ag
         for (int i = 0; i < strlen(letters); i++)
             if (c == letters[i])
                 n++;
-        if(n >= 4)
+        if (n >= 4)
             return true;
         else
             return false;
